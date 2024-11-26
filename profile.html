@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Particles in the background */
+        }
+
+        .container, .btn-secondary {
+            position: relative;
+            z-index: 4; /* Ensure elements are above particles */
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <h1>Your Profile</h1>
+        <button class="btn-secondary" onclick="window.location.href='index.html'">Back to Feed</button>
+        <div id="user-activity">
+            <h2>Your Questions</h2>
+            <div id="user-questions"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80, /* Adjusted to lower count */
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff" /* Bright white particles */
+                },
+                "opacity": {
+                    "value": 0.5 /* Less transparent for bright particles */
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "size": {
+                    "value": 3, /* Adjusted size for less crowded look */
+                    "random": true
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3 /* Slower speed for a more relaxed effect */
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

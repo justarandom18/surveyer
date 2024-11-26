@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Hub - Feed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="particles-config.js"></script>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="sidebar">
+            <a href="profile.html" class="tab-item">Profile</a>
+            <a href="create.html" class="tab-item">Create Question</a>
+            <a href="sirveyer.html" class="tab-item">Logout</a>
+        </div>
+    </header>
+
+    <!-- Survey Feed Section -->
+    <section id="survey-feed" class="survey-feed">
+        <h2>Survey Questions</h2>
+        
+        <!-- Question Container -->
+        <div id="question-container" class="question-container">
+            <h2>Loading Question...</h2>
+            <div class="options">
+                <!-- Options will be populated dynamically here -->
+            </div>
+            <button class="btn-primary" id="skip-btn">Skip</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Survey Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Array of sample questions and options
+        const questions = [
+            {
+                question: "What is your favorite programming language?",
+                options: ["Python", "JavaScript", "Java", "C++"],
+                answers: []
+            },
+            {
+                question: "What is your favorite color?",
+                options: ["Red", "Blue", "Green", "Yellow"],
+                answers: []
+            },
+            {
+                question: "Do you prefer coffee or tea?",
+                options: ["Coffee", "Tea"],
+                answers: []
+            },
+            {
+                question: "Do you like working from home?",
+                options: ["Yes", "No"],
+                answers: []
+            },
+            {
+                question: "What’s your preferred device?",
+                options: ["Laptop", "Mobile", "Tablet"],
+                answers: []
+            },
+            {
+                question: "What is your preferred music genre?",
+                options: ["Rock", "Pop", "Classical", "Jazz"],
+                answers: []
+            },
+            {
+                question: "Are you a morning person?",
+                options: ["Yes", "No"],
+                answers: []
+            },
+            {
+                question: "What is your favorite type of food?",
+                options: ["Italian", "Chinese", "Mexican", "Indian"],
+                answers: []
+            },
+            {
+                question: "How often do you exercise?",
+                options: ["Every Day", "Few Times a Week", "Rarely", "Never"],
+                answers: []
+            },
+            {
+                question: "Are you a cat person or a dog person?",
+                options: ["Cat", "Dog"],
+                answers: []
+            }
+        ];
+
+        let currentQuestionIndex = 0; // Track the current question
+
+        // Function to load a question
+        function loadQuestion() {
+            const questionContainer = document.getElementById("question-container");
+            const optionsContainer = questionContainer.querySelector(".options");
+            const question = questions[currentQuestionIndex];
+
+            // Update the question text
+            questionContainer.querySelector("h2").textContent = `Question: ${question.question}`;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+
+            // Create new buttons for options
+            question.options.forEach((option, idx) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.classList.add("btn-secondary");
+                button.addEventListener("click", () => {
+                    answerQuestion(idx); // Handle answer selection
+                });
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Handle answer selection
+        function answerQuestion(optionIndex) {
+            const question = questions[currentQuestionIndex];
+            question.answers.push(optionIndex); // Store the answer
+
+            currentQuestionIndex++; // Move to the next question
+
+            // Check if there are more questions, otherwise finish the survey
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                alert("You've answered all questions!");
+                window.location.href = "index.html"; // Redirect to home or logout
+            }
+        }
+
+        // Skip button handler
+        document.getElementById("skip-btn").addEventListener("click", () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                alert("You've answered all questions!");
+                window.location.href = "index.html"; // Redirect to home or logout
+            }
+        });
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>
